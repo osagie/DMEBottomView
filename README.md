@@ -42,9 +42,9 @@ You create a DMEBottomView by calling:
 You can let the user open and close the view manually, or you can control it programmatically.
 
 ```
--(void)toogle:;
+-(void)toogle:
 
--(void)open:;
+-(void)open:
 
--(void)close:;
+-(void)close:
 ```
