@@ -53,18 +53,19 @@
     self.viewController = aViewController;
     self.height = aHeight;
     self.buttonImage = aImage;
-    //self.view.frame = CGRectMake(0, self.viewController.view.frame.size.width, self.viewController.view.frame.size.height, self.height);
+    self.view.frame = CGRectMake(0, self.viewController.view.frame.size.width, self.viewController.view.frame.size.height, self.height);
     
     //Create button
     self.button = [UIButton buttonWithType:UIButtonTypeCustom];
     [self.button setImage:self.buttonImage forState:UIControlStateNormal];
-    //self.button.frame = CGRectMake(0, self.viewController.view.frame.size.width-self.buttonImage.size.height, self.buttonImage.size.width, self.buttonImage.size.height);
+    self.button.frame = CGRectMake(0, self.viewController.view.frame.size.width-self.buttonImage.size.height, self.buttonImage.size.width, self.buttonImage.size.height);
     
-    [aViewController.view addSubview:self.view];
-    [aViewController.view bringSubviewToFront:self.view];
-    [aViewController.view addSubview:self.button];
-    [aViewController.view bringSubviewToFront:self.button];
     [self.button addTarget:self action:@selector(toogle:) forControlEvents:UIControlEventTouchUpInside];
+    
+    [self.viewController.view addSubview:self.view];
+    [self.viewController.view bringSubviewToFront:self.view];
+    [self.viewController.view addSubview:self.button];
+    [self.viewController.view bringSubviewToFront:self.button];
     
     //Set status
     self.viewVisible = NO;
@@ -74,13 +75,13 @@
 {
     [super viewDidAppear:animated];
     
-    [self moveViews];
-    
     //Screen rotation
     [[UIDevice currentDevice] beginGeneratingDeviceOrientationNotifications];
     [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(didRotate:)
                                                 name:@"UIDeviceOrientationDidChangeNotification"
                                               object:nil];
+    
+    [self moveViews];
 }
 
 -(void)viewWillDisappear:(BOOL)animated
