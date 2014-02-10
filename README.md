@@ -10,7 +10,14 @@ DMEBottomView is a simple view to put on bottom of other view.
 
 ##Instalation
 
-Cocoapods, or copy the contents of /DMEBottomView into your project.
+Cocoapods, by podfile
+
+```
+platform :ios, '6.0'
+pod "DMEBottomView"
+```
+
+or copy the contents of /DMEBottomView into your project.
 
 ##Demo App
 
