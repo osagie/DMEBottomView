@@ -21,7 +21,10 @@
 
 @implementation DMEBottomViewController
 
-+(instancetype)sharedInstance {
+#pragma mark Init methods
+
++(instancetype)sharedInstance
+{
     static DMEBottomViewController *sharedInstance = nil;
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
@@ -60,7 +63,7 @@
     [self.button setImage:self.buttonImage forState:UIControlStateNormal];
     self.button.frame = CGRectMake(0, self.viewController.view.frame.size.width-self.buttonImage.size.height, self.buttonImage.size.width, self.buttonImage.size.height);
     
-    [self.button addTarget:self action:@selector(toogle:) forControlEvents:UIControlEventTouchUpInside];
+    [self.button addTarget:self action:@selector(tapToogle) forControlEvents:UIControlEventTouchUpInside];
     
     [self.viewController.view addSubview:self.view];
     [self.viewController.view bringSubviewToFront:self.view];
@@ -77,7 +80,7 @@
     
     //Screen rotation
     [[UIDevice currentDevice] beginGeneratingDeviceOrientationNotifications];
-    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(didRotate:)
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didRotate:)
                                                 name:@"UIDeviceOrientationDidChangeNotification"
                                               object:nil];
     
@@ -90,8 +93,10 @@
     
     //Screen rotation
     [[UIDevice currentDevice] endGeneratingDeviceOrientationNotifications];
-    [[NSNotificationCenter defaultCenter] removeObserver:self forKeyPath:@"UIDeviceOrientationDidChangeNotification"];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:@"UIDeviceOrientationDidChangeNotification" object:nil];
 }
+
+#pragma mark Open/Close methods
 
 -(void)open:(BOOL)animated
 {
@@ -146,6 +151,14 @@
     else{
         [self open:animated];
     }
+}
+
+#pragma mark Util methods
+
+
+-(void)tapToogle
+{
+    [self toogle:YES];
 }
 
 -(void)didRotate:(NSNotification *)notification
