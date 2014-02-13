@@ -17,19 +17,18 @@ platform :ios, '6.0'
 pod "DMEBottomView"
 ```
 
-or copy the contents of /DMEBottomView into your project.
+or copy the contents of `/DMEBottomView` into your project.
 
 ##Demo App
 
-Navigate to /DMEBottomViewExample and open the proyect file.
+Navigate to `/DMEBottomViewExample` and open the proyect file.
 
 ##How do I use DMEBottomView
 
-Include the following four files in your project:
+Include the following file in your project:
 
 ```
 DMEBottomView.h
-DMEBottomView.m
 ```
 
 You create a DMEBottomView by calling:
@@ -49,9 +48,37 @@ You create a DMEBottomView by calling:
 You can let the user open and close the view manually, or you can control it programmatically.
 
 ```
--(void)toogle:
+-(void)toogle:(BOOL)animated withCompletionBlock:(DMEBottomViewControllerCompletionBlock)completionBlock
 
--(void)open:
+-(void)open:(BOOL)animated withCompletionBlock:(DMEBottomViewControllerCompletionBlock)completionBlock
 
--(void)close:
+-(void)close:(BOOL)animated withCompletionBlock:(DMEBottomViewControllerCompletionBlock)completionBlock
+```
+
+##Customize
+
+You can choose the positión of the button:
+
+```
+//Button align left (default)
+[DMEBottomViewController sharedInstance].position = DMEBottomViewControllerPositionLeft;
+
+//Button align center
+[DMEBottomViewController sharedInstance].position = DMEBottomViewControllerPositionCenter;
+
+//Button align right
+[DMEBottomViewController sharedInstance].position = DMEBottomViewControllerPositionRight;   
+```
+
+You can choose the colors of default button if you don't replace then.
+
+```
+//Background color
+[DMEBottomViewController sharedInstance].buttonBackgroundColor = [UIColor darkGrayColor];
+
+//Arrow color
+[DMEBottomViewController sharedInstance].buttonArrowColor = [UIColor whiteColor];
+
+//Border color
+[DMEBottomViewController sharedInstance].buttonBorderColor = [UIColor lightGrayColor];
 ```
