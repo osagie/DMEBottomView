@@ -189,10 +189,6 @@
 -(void)moveViews
 {
     UIDeviceOrientation orientation = [[UIDevice currentDevice] orientation];
-
-    NSLog(@"%f", self.viewController.view.bounds.size.width);
-    NSLog(@"%f", self.viewController.view.bounds.size.height);
-    NSLog(@"%d", orientation);
     
     NSInteger deltaY;
     if(!self.viewVisible){
