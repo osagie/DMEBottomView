@@ -13,7 +13,8 @@
 @property (strong, nonatomic) UIViewController *viewController;
 @property (strong, nonatomic) UIView *view;
 @property (strong, nonatomic) UIButton *button;
-@property (strong, nonatomic) UIImage *buttonImage;
+@property (strong, nonatomic) UIImage *buttonOpenImage;
+@property (strong, nonatomic) UIImage *buttonCloseImage;
 @property (nonatomic) NSUInteger height;
 @property (nonatomic) BOOL viewVisible;
 
@@ -40,31 +41,32 @@
 
 -(void)createInViewController:(UIViewController *)aViewController withView:(UIView *)aView
 {
-    [self createInViewController:aViewController withView:aView withButtonImage:[self defaultButtonImage] withViewHeight:aView.bounds.size.height];
+    [self createInViewController:aViewController withView:aView withOpenImage:[self defaultOpenButtonImage] withCloseImage:[self defaultCloseButtonImage] withViewHeight:aView.bounds.size.height];
 }
 
--(void)createInViewController:(UIViewController *)aViewController withView:(UIView *)aView withButtonImage:(UIImage *)aImage
+-(void)createInViewController:(UIViewController *)aViewController withView:(UIView *)aView withOpenImage:(UIImage *)openImage withCloseImage:(UIImage *)closeImage
 {
-    [self createInViewController:aViewController withView:aView withButtonImage:aImage withViewHeight:aView.bounds.size.height];
+    [self createInViewController:aViewController withView:aView withOpenImage:openImage withCloseImage:closeImage withViewHeight:aView.bounds.size.height];
 }
 
 -(void)createInViewController:(UIViewController *)aViewController withView:(UIView *)aView withViewHeight:(NSUInteger)aHeight
 {
-    [self createInViewController:aViewController withView:aView withButtonImage:[self defaultButtonImage] withViewHeight:aHeight];
+    [self createInViewController:aViewController withView:aView withOpenImage:[self defaultOpenButtonImage] withCloseImage:[self defaultCloseButtonImage] withViewHeight:aHeight];
 }
 
--(void)createInViewController:(UIViewController *)aViewController withView:(UIView *)aView withButtonImage:(UIImage *)aImage withViewHeight:(NSUInteger)aHeight
+-(void)createInViewController:(UIViewController *)aViewController withView:(UIView *)aView withOpenImage:(UIImage *)openImage withCloseImage:(UIImage *)closeImage withViewHeight:(NSUInteger)aHeight
 {
     if(!self.viewController){
         //Insert view
         self.view = aView;
         self.viewController = aViewController;
         self.height = aHeight;
-        self.buttonImage = aImage;
+        self.buttonOpenImage = openImage;
+        self.buttonCloseImage = closeImage;
         
         //Create button
         self.button = [UIButton buttonWithType:UIButtonTypeCustom];
-        [self.button setImage:self.buttonImage forState:UIControlStateNormal];
+        [self.button setImage:self.buttonOpenImage forState:UIControlStateNormal];
         
         [self.button addTarget:self action:@selector(tapToogle) forControlEvents:UIControlEventTouchUpInside];
         
@@ -114,6 +116,7 @@
                 self.button.frame = CGRectMake(self.button.frame.origin.x, newY-self.button.frame.size.height, self.button.frame.size.width, self.button.frame.size.height);
             } completion:^(BOOL finished) {
                 self.viewVisible = YES;
+                [self.button setImage:self.buttonCloseImage forState:UIControlStateNormal];
                 
                 if(completionBlock){
                     completionBlock();
@@ -124,6 +127,7 @@
             self.view.frame = CGRectMake(self.view.frame.origin.x, newY, self.view.frame.size.width, self.view.frame.size.height);
             self.button.frame = CGRectMake(self.button.frame.origin.x, newY-self.button.frame.size.height, self.button.frame.size.width, self.button.frame.size.height);
             self.viewVisible = YES;
+            [self.button setImage:self.buttonCloseImage forState:UIControlStateNormal];
             
             if(completionBlock){
                 completionBlock();
@@ -145,6 +149,7 @@
                 self.button.frame = CGRectMake(self.button.frame.origin.x, newY-self.button.frame.size.height, self.button.frame.size.width, self.button.frame.size.height);
             } completion:^(BOOL finished) {
                 self.viewVisible = NO;
+                [self.button setImage:self.buttonOpenImage forState:UIControlStateNormal];
                 
                 if(completionBlock){
                     completionBlock();
@@ -155,6 +160,7 @@
             self.view.frame = CGRectMake(self.view.frame.origin.x, newY, self.view.frame.size.width, self.view.frame.size.height);
             self.button.frame = CGRectMake(self.button.frame.origin.x, newY-self.button.frame.size.height, self.button.frame.size.width, self.button.frame.size.height);
             self.viewVisible = NO;
+            [self.button setImage:self.buttonOpenImage forState:UIControlStateNormal];
             
             if(completionBlock){
                 completionBlock();
@@ -188,8 +194,6 @@
 
 -(void)moveViews
 {
-    UIDeviceOrientation orientation = [[UIDevice currentDevice] orientation];
-    
     NSInteger deltaY;
     if(!self.viewVisible){
         deltaY = 0;
@@ -199,7 +203,6 @@
     }
     
     NSInteger x;
-    //if(orientation == UIDeviceOrientationPortrait || orientation == UIDeviceOrientationPortraitUpsideDown || orientation == UIDeviceOrientationUnknown){
     self.view.frame = CGRectMake(0, self.viewController.view.bounds.size.height-deltaY, self.viewController.view.bounds.size.width, self.height);
     
     switch (self.position) {
@@ -207,19 +210,19 @@
             x = 0;
             break;
         case DMEBottomViewControllerPositionRight:
-            x = self.viewController.view.bounds.size.width-self.buttonImage.size.width;
+            x = self.viewController.view.bounds.size.width-self.buttonOpenImage.size.width;
             break;
         case DMEBottomViewControllerPositionCenter:
-            x = (self.viewController.view.bounds.size.width/2)-(self.buttonImage.size.width/2);
+            x = (self.viewController.view.bounds.size.width/2)-(self.buttonOpenImage.size.width/2);
             break;
             
         default:
             break;
     }
-    self.button.frame = CGRectMake(x, self.viewController.view.bounds.size.height-self.buttonImage.size.height-deltaY, self.buttonImage.size.width, self.buttonImage.size.height);
+    self.button.frame = CGRectMake(x, self.viewController.view.bounds.size.height-self.buttonOpenImage.size.height-deltaY, self.buttonOpenImage.size.width, self.buttonOpenImage.size.height);
 }
 
--(UIImage *)defaultButtonImage
+-(UIImage *)defaultOpenButtonImage
 {
     static UIImage *defaultImage = nil;
 	static dispatch_once_t onceToken;
@@ -315,6 +318,110 @@
             [bezierPath stroke];
         }
 
+        // get an image of the graphics context
+        defaultImage = UIGraphicsGetImageFromCurrentImageContext();
+        
+        // end the context
+        UIGraphicsEndImageContext();
+	});
+    
+    return defaultImage;
+}
+
+-(UIImage *)defaultCloseButtonImage
+{
+    static UIImage *defaultImage = nil;
+	static dispatch_once_t onceToken;
+	dispatch_once(&onceToken, ^{
+        if (self.position == DMEBottomViewControllerPositionLeft) {
+            UIGraphicsBeginImageContextWithOptions(CGSizeMake(38, 38), NO, 0.0f);
+            
+            //// Oval Drawing
+            UIBezierPath* ovalPath = [UIBezierPath bezierPathWithOvalInRect: CGRectMake(-38, 0, 76, 76)];
+            [self.buttonBackgroundColor setFill];
+            [ovalPath fill];
+            [self.buttonBorderColor setStroke];
+            ovalPath.lineWidth = 1;
+            [ovalPath stroke];
+            
+            //// Bezier Drawing
+            UIBezierPath* bezierPath = [UIBezierPath bezierPath];
+            [bezierPath moveToPoint: CGPointMake(10, 17.5)];
+            [bezierPath addCurveToPoint: CGPointMake(23.52, 30.48) controlPoint1: CGPointMake(24.56, 31.48) controlPoint2: CGPointMake(23.52, 30.48)];
+            [bezierPath addLineToPoint: CGPointMake(36, 17.5)];
+            [bezierPath addLineToPoint: CGPointMake(31.84, 17.5)];
+            [bezierPath addLineToPoint: CGPointMake(23.52, 26.49)];
+            [bezierPath addLineToPoint: CGPointMake(14.16, 17.5)];
+            [bezierPath addLineToPoint: CGPointMake(10, 17.5)];
+            [bezierPath closePath];
+            bezierPath.lineJoinStyle = kCGLineJoinRound;
+            
+            [self.buttonArrowColor setFill];
+            [bezierPath fill];
+            [self.buttonArrowColor setStroke];
+            bezierPath.lineWidth = 1;
+            [bezierPath stroke];
+        }
+        else if (self.position == DMEBottomViewControllerPositionRight){
+            UIGraphicsBeginImageContextWithOptions(CGSizeMake(38, 38), NO, 0.0f);
+            
+            //// Oval Drawing
+            UIBezierPath* ovalPath = [UIBezierPath bezierPathWithOvalInRect: CGRectMake(0, 0, 76, 76)];
+            [self.buttonBackgroundColor setFill];
+            [ovalPath fill];
+            [self.buttonBorderColor setStroke];
+            ovalPath.lineWidth = 1;
+            [ovalPath stroke];
+            
+            //// Bezier Drawing
+            UIBezierPath* bezierPath = [UIBezierPath bezierPath];
+            [bezierPath moveToPoint: CGPointMake(10, 17.5)];
+            [bezierPath addCurveToPoint: CGPointMake(23.52, 30.48) controlPoint1: CGPointMake(24.56, 31.48) controlPoint2: CGPointMake(23.52, 30.48)];
+            [bezierPath addLineToPoint: CGPointMake(36, 17.5)];
+            [bezierPath addLineToPoint: CGPointMake(31.84, 17.5)];
+            [bezierPath addLineToPoint: CGPointMake(23.52, 26.49)];
+            [bezierPath addLineToPoint: CGPointMake(14.16, 17.5)];
+            [bezierPath addLineToPoint: CGPointMake(10, 17.5)];
+            [bezierPath closePath];
+            bezierPath.lineJoinStyle = kCGLineJoinRound;
+            
+            [self.buttonArrowColor setFill];
+            [bezierPath fill];
+            [self.buttonArrowColor setStroke];
+            bezierPath.lineWidth = 1;
+            [bezierPath stroke];
+        }
+        else{
+            UIGraphicsBeginImageContextWithOptions(CGSizeMake(76, 38), NO, 0.0f);
+            
+            //// Oval Drawing
+            UIBezierPath* ovalPath = [UIBezierPath bezierPathWithOvalInRect: CGRectMake(0, 1, 76, 76)];
+            [self.buttonBackgroundColor setFill];
+            [ovalPath fill];
+            [self.buttonBorderColor setStroke];
+            ovalPath.lineWidth = 1;
+            [ovalPath stroke];
+            
+            
+            //// Bezier Drawing
+            UIBezierPath* bezierPath = [UIBezierPath bezierPath];
+            [bezierPath moveToPoint: CGPointMake(25, 17.5)];
+            [bezierPath addCurveToPoint: CGPointMake(38.52, 30.48) controlPoint1: CGPointMake(39.56, 31.48) controlPoint2: CGPointMake(38.52, 30.48)];
+            [bezierPath addLineToPoint: CGPointMake(51, 17.5)];
+            [bezierPath addLineToPoint: CGPointMake(46.84, 17.5)];
+            [bezierPath addLineToPoint: CGPointMake(38.52, 26.49)];
+            [bezierPath addLineToPoint: CGPointMake(29.16, 17.5)];
+            [bezierPath addLineToPoint: CGPointMake(25, 17.5)];
+            [bezierPath closePath];
+            bezierPath.lineJoinStyle = kCGLineJoinRound;
+            
+            [self.buttonArrowColor setFill];
+            [bezierPath fill];
+            [self.buttonArrowColor setStroke];
+            bezierPath.lineWidth = 1;
+            [bezierPath stroke];
+        }
+        
         // get an image of the graphics context
         defaultImage = UIGraphicsGetImageFromCurrentImageContext();
         

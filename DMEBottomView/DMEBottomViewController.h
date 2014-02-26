@@ -26,11 +26,11 @@ typedef void (^DMEBottomViewControllerCompletionBlock)();
 
 -(void)createInViewController:(UIViewController *)aViewController withView:(UIView *)aView;
 
--(void)createInViewController:(UIViewController *)aViewController withView:(UIView *)aView withButtonImage:(UIImage *)aImage;
+-(void)createInViewController:(UIViewController *)aViewController withView:(UIView *)aView withOpenImage:(UIImage *)openImage withCloseImage:(UIImage *)closeImage;
 
 -(void)createInViewController:(UIViewController *)aViewController withView:(UIView *)aView withViewHeight:(NSUInteger)aHeight;
 
--(void)createInViewController:(UIViewController *)aViewController withView:(UIView *)aView withButtonImage:(UIImage *)aImage withViewHeight:(NSUInteger)aHeight;
+-(void)createInViewController:(UIViewController *)aViewController withView:(UIView *)aView withOpenImage:(UIImage *)openImage withCloseImage:(UIImage *)closeImage withViewHeight:(NSUInteger)aHeight;
 
 -(void)toogle:(BOOL)animated withCompletionBlock:(DMEBottomViewControllerCompletionBlock)completionBlock;
 

@@ -36,11 +36,11 @@ You create a DMEBottomView by calling:
 ```
 -(void)createInViewController:withView:
 
--(void)createInViewController:withView:withButtonImage:
+-(void)createInViewController:withView:withOpenImage:withCloseImage:
 
 -(void)createInViewController:withView:withViewHeight:
 
--(void)createInViewController:withView:withButtonImage:withViewHeight:
+-(void)createInViewController:withView:withOpenImage:withCloseImage:withViewHeight:
 ```
 
 ##Opening and Closing

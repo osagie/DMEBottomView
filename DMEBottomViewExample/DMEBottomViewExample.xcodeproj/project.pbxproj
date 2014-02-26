@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		27151B4F18BE358E00168255 /* DMEBottomViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 27151B4D18BE358E00168255 /* DMEBottomViewController.m */; };
 		2778712018A8D7E900F19D5D /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2778711F18A8D7E900F19D5D /* Foundation.framework */; };
 		2778712218A8D7E900F19D5D /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2778712118A8D7E900F19D5D /* CoreGraphics.framework */; };
 		2778712418A8D7EA00F19D5D /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2778712318A8D7EA00F19D5D /* UIKit.framework */; };
@@ -22,7 +23,6 @@
 		2778714418A8D7EA00F19D5D /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2778712318A8D7EA00F19D5D /* UIKit.framework */; };
 		2778714C18A8D7EA00F19D5D /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 2778714A18A8D7EA00F19D5D /* InfoPlist.strings */; };
 		2778714E18A8D7EA00F19D5D /* DMEBottomViewExampleTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 2778714D18A8D7EA00F19D5D /* DMEBottomViewExampleTests.m */; };
-		2778715918A8D87B00F19D5D /* DMEBottomViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2778715818A8D87B00F19D5D /* DMEBottomViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -36,6 +36,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		27151B4D18BE358E00168255 /* DMEBottomViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DMEBottomViewController.m; path = ../../DMEBottomView/DMEBottomViewController.m; sourceTree = "<group>"; };
+		27151B4E18BE358E00168255 /* DMEBottomViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DMEBottomViewController.h; path = ../../DMEBottomView/DMEBottomViewController.h; sourceTree = "<group>"; };
 		2778711C18A8D7E900F19D5D /* DMEBottomViewExample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DMEBottomViewExample.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2778711F18A8D7E900F19D5D /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		2778712118A8D7E900F19D5D /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -56,8 +58,6 @@
 		2778714918A8D7EA00F19D5D /* DMEBottomViewExampleTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "DMEBottomViewExampleTests-Info.plist"; sourceTree = "<group>"; };
 		2778714B18A8D7EA00F19D5D /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		2778714D18A8D7EA00F19D5D /* DMEBottomViewExampleTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DMEBottomViewExampleTests.m; sourceTree = "<group>"; };
-		2778715718A8D87B00F19D5D /* DMEBottomViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DMEBottomViewController.h; path = ../../../DMEBottomView/DMEBottomViewController.h; sourceTree = "<group>"; };
-		2778715818A8D87B00F19D5D /* DMEBottomViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DMEBottomViewController.m; path = ../../../DMEBottomView/DMEBottomViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -117,8 +117,8 @@
 		2778712518A8D7EA00F19D5D /* DMEBottomViewExample */ = {
 			isa = PBXGroup;
 			children = (
-				2778715718A8D87B00F19D5D /* DMEBottomViewController.h */,
-				2778715818A8D87B00F19D5D /* DMEBottomViewController.m */,
+				27151B4E18BE358E00168255 /* DMEBottomViewController.h */,
+				27151B4D18BE358E00168255 /* DMEBottomViewController.m */,
 				2778712E18A8D7EA00F19D5D /* DMEAppDelegate.h */,
 				2778712F18A8D7EA00F19D5D /* DMEAppDelegate.m */,
 				2778713118A8D7EA00F19D5D /* Main_iPhone.storyboard */,
@@ -260,7 +260,7 @@
 			files = (
 				2778713918A8D7EA00F19D5D /* DMEViewController.m in Sources */,
 				2778712C18A8D7EA00F19D5D /* main.m in Sources */,
-				2778715918A8D87B00F19D5D /* DMEBottomViewController.m in Sources */,
+				27151B4F18BE358E00168255 /* DMEBottomViewController.m in Sources */,
 				2778713018A8D7EA00F19D5D /* DMEAppDelegate.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -482,6 +482,7 @@
 				2778715318A8D7EA00F19D5D /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		2778715418A8D7EA00F19D5D /* Build configuration list for PBXNativeTarget "DMEBottomViewExampleTests" */ = {
 			isa = XCConfigurationList;
@@ -490,6 +491,7 @@
 				2778715618A8D7EA00F19D5D /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
